@@ -20,6 +20,8 @@
     body { background: #14161f; color: #e4e6ee; }
     h1, h2 { border-color: #9db4e4; color: #9db4e4; }
     code, .mono { background: #232738; }
+    table th, table td { border-bottom-color: #2a2f42 !important; }
+    table th { color: #9db4e4; }
   }
 </style>
 </head>
@@ -37,13 +39,19 @@ what it does not.</p>
 
 <h2>1. The short version</h2>
 <ul>
-  <li>The app <strong>does not collect, use, transmit, or share any personal
-      or device data</strong>.</li>
-  <li>The app <strong>works entirely offline</strong> and contains no
-      accounts, no advertising, and no analytics.</li>
+  <li><strong>Today</strong>, the app <strong>does not collect, use,
+      transmit, or share any personal or device data</strong>.</li>
+  <li>It <strong>works entirely offline</strong> and contains no accounts,
+      no advertising, and no analytics.</li>
   <li>Everything you create inside the app (bookmarks, notes, highlights)
       stays on your device, in the app's private storage.</li>
   <li>We cannot see your data and have no technical access to it.</li>
+  <li><strong>In a future update</strong> we will add optional analytics and
+      crash-reporting built on <strong>Google Firebase</strong>. We disclose
+      every service and data type involved — in full detail — in §5 below,
+      before we ship a single line of it. When that update lands, the "does
+      not collect" statement in this section is replaced by a pointer to
+      §5, and Google's services start applying as described there.</li>
 </ul>
 
 <h2>2. Information the app stores — on your device only</h2>
@@ -68,7 +76,9 @@ protects this storage: other apps cannot read it, and it is removed when you
 uninstall the app or erase its data.</p>
 
 <h2>3. Information the app does not collect</h2>
-<p>The app does not use, embed, or call any of the following:</p>
+<p>The app does not use, embed, or call any of the following (all statements
+in this section describe the app <em>as it works today</em>; §5 explains what
+changes when the planned Firebase services ship):</p>
 <ul>
   <li>third-party analytics, crash-reporting, or marketing SDKs;</li>
   <li>advertising networks or identifiers;</li>
@@ -85,8 +95,83 @@ third party.</p>
 <p>Because the app is fully offline and self-contained, it requests no Android
 permissions. It does not access the Internet, your storage, or any other
 resource outside its own sandbox.</p>
+<p>When the planned Firebase services (§5) ship, the app will start using an
+Internet connection for exactly those features — analytics events, crash
+reports, messages, and any cloud sync we announce on the listing — and that
+permission change will appear in the store listing at the same update, with
+this policy already covering it.</p>
 
-<h2>5. Content sources and independence</h2>
+<h2>5. Google Firebase — planned analytics and stability services (disclosed in advance)</h2>
+<p>A future update of the app will integrate services from <strong>Google
+Firebase</strong>. This section discloses every planned product, the data
+involved, its purpose, and your controls, so that this policy remains valid
+on the day integration ships and you are never surprised. <u>None of the
+processing described here happens until that update</u>; today, §1–§4 above
+remain an accurate description of the app.</p>
+
+<h3>5.1 Products planned and their data</h3>
+<table style="border-collapse:collapse;width:100%;font-size:.92rem">
+  <tr style="text-align:left;color:#6a6e7c">
+    <th style="padding:.4rem .5rem;border-bottom:1px solid #d9dce6">Firebase product</th>
+    <th style="padding:.4rem .5rem;border-bottom:1px solid #d9dce6">Data it processes</th>
+    <th style="padding:.4rem .5rem;border-bottom:1px solid #d9dce6">Purpose</th>
+  </tr>
+  <tr><td style="padding:.45rem .5rem;border-bottom:1px solid #eee;font-weight:600">Google Analytics for Firebase</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">Firebase App Instance ID / installation identifier (random, per install); feature usage and screen-view events; app version, device model, OS version; country/city derived from IP; daily session counts</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">Understand which regulations, search habits, and screens matter, so we improve the reference instead of guessing</td></tr>
+  <tr><td style="padding:.45rem .5rem;border-bottom:1px solid #eee;font-weight:600">Firebase Crashlytics</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">Crash stack traces; device model, OS version, app version; recent in-app "breadcrumb" events; the same per-install identifier</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">Detect and fix crashes — a regulation reader must never fail on a checkride morning</td></tr>
+  <tr><td style="padding:.45rem .5rem;border-bottom:1px solid #eee;font-weight:600">Firebase Cloud Messaging (FCM)</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">A push-notification registration token (random, per install, revocable); optional notification content — e.g. notice when a new regulation edition is bundled</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">Tell you when updated regulations or new editions are available — once, only for content that matters</td></tr>
+  <tr><td style="padding:.45rem .5rem;border-bottom:1px solid #eee;font-weight:600">Firebase Remote Config &amp; A/B Testing</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">App Instance ID used to fetch configuration values; experiment-group flags</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">Adjust text size defaults, search behavior or edition pipelines without a full reinstall of every device</td></tr>
+  <tr><td style="padding:.45rem .5rem;border-bottom:1px solid #eee;font-weight:600">Firebase Performance Monitoring</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">App startup time, network performance traces, device/app metrics</td>
+      <td style="padding:.45rem .5rem;border-bottom:1px solid #eee">Keep search instant on older phones on a hangar's poor connectivity (when sync ships)</td></tr>
+  <tr><td style="padding:.45rem .5rem;font-weight:600">Firebase Authentication, Cloud Firestore / Cloud Storage (optional, only if a cloud-sync or account sign-in feature is announced)</td>
+      <td style="padding:.45rem .5rem">Account identifier you create (e.g. a Google ID); the notes/bookmarks synchronised in the cloud; timestamps</td>
+      <td style="padding:.45rem .5rem">Optional cloud backup of your notes/highlights across devices — never a requirement to use the app offline</td></tr>
+</table>
+
+<h3>5.2 Data controller role</h3>
+<p>Google, as the Firebase processor, handles the data described above under
+Google's <em>Firebase Terms</em>, the <em>Google Cloud/DPA</em>, and Google
+Firebase's product-privacy documentation. We process it only to operate and
+improve the app; we do not combine it with anything personal, because we
+hold no personal data; we do not sell it; and we do not use it for
+advertising. If a future feature required advertising identifiers, this
+policy would be amended first.</p>
+
+<h3>5.3 Retention</h3>
+<p>Analytics event data is kept no longer than Google's configurable
+retention for Firebase (typically 2 months, maximum 14); crash logs and
+their metadata are kept in Crashlytics for up to 90 days; FCM tokens live
+only while the app install is alive and are invalidated on uninstall or
+manual data reset.</p>
+
+<h3>5.4 Your controls — shipped together with the SDK</h3>
+<ul>
+  <li>An in-app <strong>"Share usage analytics"</strong> toggle and a separate
+      <strong>"Share crash reports"</strong> toggle, both reachable from
+      Settings. When off, Firebase collection can no longer take place for
+      that device (Analytics collection is disabled at the SDK level prior
+      to any event upload).</li>
+  <li>Uninstalling the app, or clearing app data, resets the per-install
+      identifier and deletes locally stored Firebase data.</li>
+  <li>The app is never required by Firebase features: with all toggles off
+      the regulations remain fully readable and searchable on the device.</li>
+</ul>
+
+<h3>5.5 Independence unchanged</h3>
+<p>None of the Firebase processing affects the regulatory contents. Our
+commitment stands: no advertising SDK, no data sale, no cross-app tracking,
+no profile building against your reading habits — analytics exist to make
+the reference better, never to monetise you.</p>
+
+<h2>6. Content sources and independence</h2>
 <p>The regulatory text bundled in the app is public-domain material of the
 United States government. FAR AIM Pocket is an independent study and
 reference tool and is <strong>not affiliated with, endorsed by, or an
@@ -94,13 +179,13 @@ official source of</strong> the Federal Aviation Administration (FAA) or any
 other government agency. Always verify current requirements against official
 FAA publications before flying or acting on them.</p>
 
-<h2>6. Children</h2>
+<h2>7. Children</h2>
 <p>The app is a professional training reference intended for adults. It does
 not direct advertising, marketing, or any interactive collection feature at
 children under 13, and because it collects no data at all, it does not
 knowingly gather information from anyone, child or adult.</p>
 
-<h2>7. In-app purchases (planned feature)</h2>
+<h2>8. In-app purchases (planned feature)</h2>
 <p>A future update may add optional purchase of advanced study tools. If and
 when that ships, you will be clearly told before it goes live in that update;
 when it does, this policy will be updated to reflect it. Even then:</p>
@@ -113,33 +198,37 @@ when it does, this policy will be updated to reflect it. Even then:</p>
       free — purchases will never be required to access regulatory text.</li>
 </ul>
 
-<h2>8. Deleting your data</h2>
+<h2>9. Deleting your data</h2>
 <p>All app data lives on your device only. To remove it completely, either
 uninstall the app or use your device's <em>Settings → Apps → FAR AIM Pocket →
 Storage → Clear data</em>. There is no server copy for us to retain, hand
 over, or delete on request, because none exists.</p>
+<p>Once the planned Firebase services (§5) are active, the corresponding
+Google-held data is also removed by the same actions — uninstalling or
+clearing app data resets the per-install Firebase identifiers and stops
+their collection.</p>
 
-<h2>9. Your rights</h2>
+<h2>10. Your rights</h2>
 <p>Laws such as the GDPR (EU) and the CCPA (California) grant rights to access,
 correct, erase, or port personal data. Because the app never collects personal
 data, there is no data held by us to exercise those rights against. Should we
-ever begin collecting data (for example, with the planned purchases), this
-policy will be updated first and the relevant rights and contact points will
-be described here.</p>
+ever begin collecting data (for example, with the planned purchases or the
+Firebase services described in §5), this policy will be updated first and the
+relevant rights and contact points will be described here.</p>
 
-<h2>10. Changes to this policy</h2>
+<h2>11. Changes to this policy</h2>
 <p>The latest revision of this policy is always on this page under the same
 URL, and material updates will also be announced in the app's release notes.
 The "effective date" above reflects the current version.</p>
 
-<h2>11. Contact</h2>
+<h2>12. Contact</h2>
 <p>Questions about privacy or this app? Write to
 <strong>aminloungou@gmail.com</strong>. We aim to reply within a few
 business days.</p>
 
 <hr>
 <p class="updated">FAR AIM Pocket — Amin Loungou —
-Privacy policy, version 1.0 (2026-11-07)</p>
+Privacy policy, version 1.1 (2026-11-07)</p>
 
 </main>
 </body>
